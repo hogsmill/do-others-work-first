@@ -7,5 +7,5 @@ the code will be here shortly... :-)
 1) Randomise cards of other teams
 2) GUI :-)
 3) Try more teams
-40 Take value into account?
+4) Take value into account?
 
