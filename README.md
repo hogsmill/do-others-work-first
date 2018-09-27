@@ -4,8 +4,8 @@ the code will be here shortly... :-)
 
 ## Possible Enhancements
 
-. Randomise cards of other teams
-. GUI :-)
-. Try more teams
-. Take value into account?
+1) Randomise cards of other teams
+2) GUI :-)
+3) Try more teams
+40 Take value into account?
 
