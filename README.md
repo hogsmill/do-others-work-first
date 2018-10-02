@@ -6,6 +6,10 @@ Simply download and
 
 ```ruby dowork.rb```
 
+## Status
+
+Basic game play built; strategies when blocked to be added shortly. Watch this space :-)
+
 ## Possible Enhancements
 
 1) Randomise cards of other teams
