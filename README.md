@@ -1,6 +1,8 @@
 # Do Other's Work First Ruby Simulation
 
-the code will be here shortly... :-)
+Simple ruby script to run other teams' work first simulation. Simply download and
+
+```ruby dowork.rb```
 
 ## Possible Enhancements
 
