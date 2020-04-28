@@ -55,13 +55,9 @@ class Cards:
         this_suit['others cards'].append({'suit': other_suit, 'card': that_suit['for others'][index]})
         del that_suit['for others'][index]
 
-  def next_card_in_suit(self, card):
-    if (not card):
-      return self.suit[0]
-    elif (card < len(self.suit)):
-      return self.suit[card]  # Because suit starts at 1, and indexed from 0
-    else:
-      return False
+  def play_next_suit_card(self, suit):
+    self.state[suit]['current'] = self.state[suit]['cards'][0]
+    del self.state[suit]['cards'][0]
 
   def next_lowest_others_card(self, suit):
     next_card = False
@@ -70,22 +66,6 @@ class Cards:
       if (not next_card or self.state[suit]['others cards'][i]['card'] < next_card['card']):
         next_card = self.state[suit]['others cards'][i]
     return next_card
-
-  def next_card_is_playable(self, suit):
-    current = self.state[suit]['current']
-    if (not current):
-      return self.state[suit]['cards'][0] == self.suit[0]
-    else:
-      return len(self.state[suit]['cards']) > 0 and self.state[suit]['cards'][0] == self.next_card_in_suit(current)
-
-  def play_next_card(self, suit):
-    next_card = self.next_card_in_suit(self.state[suit]['current'])
-    if (next_card):
-      self.state[suit]['current'] = self.state[suit]['cards'][0]
-      del self.state[suit]['cards'][0]
-      self.state[suit]['blocked'] = False
-    elif (len(self.state[suit]['others cards']) > 0):
-      self.play_others_card(suit)
 
   def insert_others_card_into_cards(self, suit, card):
     cards = self.state[card['suit']]['cards']
@@ -100,8 +80,11 @@ class Cards:
   def play_others_card(self, suit):
     other_card = self.next_lowest_others_card(suit)
     if (other_card):
-      print("Playing {}:{}".format(other_card['suit'], other_card['card']))
-      self.state[other_card['suit']]['cards'] = self.insert_others_card_into_cards(suit, other_card)
+      other_suit = other_card['suit']
+      print("Playing {}:{}".format(other_suit, other_card['card']))
+      self.state[other_suit]['cards'] = self.insert_others_card_into_cards(suit, other_card)
+      if (self.state[other_suit]['current'] + 1 == self.state[other_suit]['cards'][0]):
+        self.state[other_suit]['blocked'] = False
 
   def all_blocked(self):
     all_blocked = True

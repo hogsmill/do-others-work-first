@@ -1,23 +1,20 @@
 
+from behaviour.strategies import ownworkfirst as owf
+from behaviour.strategies import ownworkunlessblocked as owub
+from behaviour.strategies import othersworkfirst as othwf
+
 class Strategy:
 
-  def __init__(self):
-    pass
+  def __init__(self, play_strategy):
 
-  def play_next_card(self, strategy, suit, cards):
-    if (strategy == 'Own Work First'):
-      self.own_work_first(suit, cards)
+    if (play_strategy == 'Own Work First'):
+      self.strategy = owf.OwnWorkFirst()
     elif (strategy == "Own Work Unless Blocked"):
-      print(strategy)
-    elif (strategy == "Other Work First"):
-      print(strategy)
+      self.strategy = owub.OwnWorkUnlessBlocked()
+    elif (strategy == "Others Work First"):
+      self.strategy = othwf.OtherWorkFirst()
     else:
       print("Unknown Strategy")
 
-  def own_work_first(self, suit, cards):
-    # If everybody's blocked, play other etam's cards. Simulates a big pow-wow
-    # escalation to work out priorities once everyone's blocked :-)
-    #
-    if (cards.all_blocked()):
-      print("All Blocked")
-      cards.play_others_card(suit)
+  def play_next_card(self, suit, cards):
+    return self.strategy.play_next_card(suit, cards)
